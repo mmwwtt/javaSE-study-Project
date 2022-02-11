@@ -91,7 +91,7 @@ class BaseDemo{
 
 
 /**
- *  加减乘除运算规则(final修饰的类型不会转换)
+ *  加减乘除运算规则(双目都用final修饰的类型不会转换)
  *   if 有double     都转成 double
  *   else if 有float 都转成 float
  *   else if 有long  都转成 long

@@ -149,6 +149,7 @@ class OtherDemo5{
 class OtherDemo6{
     public static void main(String[] args) throws UnsupportedEncodingException {
         new String("字符串".getBytes("ISO8859-1"),"GB2312");
+        new String("字符串".getBytes("ISO8859-1"),"ISO8859-1").getBytes("UTF-8");
     }
 }
 

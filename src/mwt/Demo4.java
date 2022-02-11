@@ -162,7 +162,8 @@ class ThisDemo{
 /**
  * super关键字用法
  *  用法1：调用父类构造方法
- *  用法2：父类方法被子类重写后，通过super调用父类的方法
+ *  用法2：调用父类中被重写的方法
+ *  用法3: 调用父类被隐藏的非私有成员变量
  */
 class SuperDemo1 {
     String name;

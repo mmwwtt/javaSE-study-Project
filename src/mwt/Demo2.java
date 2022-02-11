@@ -63,6 +63,8 @@ class StaticDemo{
         StaticDemo staticDemo1 = new StaticDemo();
         StaticDemo staticDemo2 = new StaticDemo();
         System.out.println(StaticDemo.staticDemo);
+        //可以但不推荐   对象.类变量|类方法的 形式访问
+        System.out.println(staticDemo1.staticDemo);
         StaticDemo.fun1();
     }
     static { System.out.println("静态代码块，类启动时执行2"); }

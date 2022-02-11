@@ -13,6 +13,7 @@ import java.util.concurrent.FutureTask;
  * 	 实现runnable接口
  * 	 实现Callable接口
  * 	 使用线程池
+ * 	需要重写run方法，start()开启线程(执行重写的run方法)
  */
 public class Demo6 {
 }

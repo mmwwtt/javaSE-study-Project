@@ -18,7 +18,7 @@
 	链地址法
 	再哈希法
 	建立一个公共溢出区
-	
+
 volatile关键字
 	保证可见性
 synchronized关键字
@@ -33,7 +33,7 @@ Thread.wait
 
 java链接数据库（原生）
 	Statement对象的作用是执行sql语句
-	
+
 has-a
 is-a
 
@@ -53,8 +53,8 @@ finalize是方法名，在垃圾收入集器将对象从内存中清除出去之
 	序列化对象
 	反射(用到构造方法)
 	克隆
-	
-	
+
+
 运行时异常有jvm处理
 非运行时异常才需要抛出
 IOException
@@ -113,3 +113,100 @@ object中的方法
 虚拟机栈描述的是Java方法执行的内存模型，用于存储局部变量，操作数栈，动态链接，方法出口等信息，是线程隔离的
 它与堆一样，是被 线程共享 的区域。 在方法区中，存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。
 原则上讲，所有的对象都在堆区上分配内存，是线程之间共享的
+
+ 调用start方法后，一旦得到cpu时间片，就开始执行run()方法。
+
+
+
+关于抽象类
+JDK 1.8以前，抽象类的方法默认访问权限为protected
+JDK 1.8时，抽象类的方法默认访问权限变为default
+
+关于接口
+JDK 1.8以前，接口中的方法必须是public的
+JDK 1.8时，接口中的方法可以是public的，也可以是default的
+JDK 1.9时，接口中的方法可以是private的
+抽象类和接口都不能实例化
+
+不会初始化子类的几种
+1. 调用的是父类的static方法或者字段
+2.调用的是父类的final方法或者字段
+3. 通过数组来引用
+
+
+.Hashmap中的value可以之null，get(key)==null有两种情况，一是key不存在，二是该key中存的是null，所以应该使用map.containskey(key)返回的true/false来判断是否存在这个key。
+
+
+
+使用transient修饰的变量不会被序列化
+
+
+按照流是否直接与特定的地方（如磁盘、内存、设备等）相连，分为节点流和处理流两类。
+
+节点流：可以从或向一个特定的地方（节点）读写数据。如FileReader.
+处理流：是对一个已存在的流的连接和封装，通过所封装的流的功能调用实现数据读写。如BufferedReader.处理流的构造方法总是要带一个其他的流对象做参数。一个流对象经过其他流的多次包装，称为流的链接。
+JAVA常用的节点流：
+
+文 件 FileInputStream FileOutputStrean FileReader FileWriter 文件进行处理的节点流。
+字符串 StringReader StringWriter 对字符串进行处理的节点流。
+数 组 ByteArrayInputStream ByteArrayOutputStreamCharArrayReader CharArrayWriter 对数组进行处理的节点流（对应的不再是文件，而是内存中的一个数组）。
+管 道 PipedInputStream PipedOutputStream PipedReaderPipedWriter对管道进行处理的节点流。
+常用处理流（关闭处理流使用关闭里面的节点流）
+
+缓冲流：BufferedInputStrean BufferedOutputStream BufferedReader BufferedWriter  增加缓冲功能，避免频繁读写硬盘。
+转换流：InputStreamReader OutputStreamReader 实现字节流和字符流之间的转换。
+数据流 DataInputStream DataOutputStream  等-提供将基础数据类型写入到文件中，或者读取出来.
+流的关闭顺序
+一般情况下是：先打开的后关闭，后打开的先关闭
+另一种情况：看依赖关系，如果流a依赖流b，应该先关闭流a，再关闭流b。例如，处理流a依赖节点流b，应该先关闭处理流a，再关闭节点流b
+可以只关闭处理流，不用关闭节点流。处理流关闭的时候，会调用其处理的节点流的关闭方法。
+
+
+数据类型转换问题。由大到小需要强制转换，由小到大不需要。
+long → float  无须强制转换，float占4个字节为什么比long占8个字节大呢，因为底层的实现方式不同
+    浮点数的32位并不是简单直接表示大小，而是按照一定标准分配的。
+    第1位，符号位，即S
+    接下来8位，指数域，即E。
+    剩下23位，小数域，即M，取值范围为[1 ,2 ) 或[0 , 1)
+    然后按照公式： V=(-1)^s * M * 2^E
+    也就是说浮点数在内存中的32位不是简单地转换为十进制，而是通过公式来计算而来，通过这个公式虽然，只有4个字节，但浮点数最大值要比长整型的范围要大。
+
+
+finalize方法，这个方法一个对象只能执行一次，只能在第一次进入被回收的队列，而且对象所属于的类重写了finalize方法才会被执行。第二次进入回收队列的时候，不会再执行其finalize方法，而是直接被二次标记，在下一次GC的时候被GC。
+
+^表示异或
+实例方法，就是类中定义的方法（非static）
+ThreadLocal用于创建线程的本地变量，该变量是线程之间不共享的
+直接调用Thread类中的run(),但不是多线程执行，就是普通方法的调用
+
+
+wait()、join()会使线程释放资源 sleep(),yield()不会释放资源
+java.lang 语言包
+java.io   输入输出包
+负数取余 符号由后面的数决定
+Java中数组是对象，不是基本数据类型（原生类），大小不可变且连续存储，因为是对象所以存在堆中。
+static成员变量不能使用this来访问
+
+
+protected Object clone ()                             //创建并返回此对象的一个副本。
+boolean equals (Object obj)                        //指示某个其他对象是否与此对象“相等”。
+protected void finalize ()                              //当垃圾回收器确定不存在对该对象的更多引用时，由对象的垃圾回收器调用此方法。
+Class<? extends Object> getClass ()         //返回一个对象的运行时类。
+int hashCode ()                                             //返回该对象的哈希码值。
+void notify ()                                                  //唤醒在此对象监视器上等待的单个线程。
+void notifyAll ()                                             //唤醒在此对象监视器上等待的所有线程。
+String toString ()                                           //返回该对象的字符串表示。
+void wait ()                                                     //导致当前的线程等待，直到其他线程调用此对象的 notify () 方法或 notifyAll () 方法。
+void wait ( long timeout)                               //导致当前的线程等待，直到其他线程调用此对象的 notify () 方法或 notifyAll () 方法，或者超过指定的时间量。
+void wait ( long timeout, int nanos)             //导致当前的线程等待，直到其他线程调用此对象的 notify () 方法或 notifyAll () 方法，或者其他某个线程中断当前线程，或者已超过某个实际时间量。
+
+
+静态变量要定义再类主体中，不能再方法中定义静态变量
+java线程类优先级相同
+垃圾回收不能确定具体的回收时间
+
+linkedlist类是实现了List接口
+AbstractSet类实现Set接口
+HashSet继承 AbstractSet类
+Class类
+String中的 substring()方法
