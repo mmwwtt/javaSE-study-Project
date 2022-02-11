@@ -1,0 +1,209 @@
+string stringBuffer stringBuilder 都是final 类型的
+抽象类中方法默认是default
+静态方法不能访问非静态变量，mian方法是静态方法，
+多行注释可以嵌套单行注释，但不能在嵌套多行注释
+
+iterator中删除对象
+	Iterator it = list.iterator();
+	while (it.hasNext())
+	{
+		Object obj = it.next();
+		if (needDelete(obj))  //needDelete返回boolean，决定是否要删除
+			it.remove();
+	}
+	
+obj中方法
+	clone();
+	equals();
+	finalize();
+	getClass();[align=left][/align]
+	notify(),notifyAll();
+	hashCode();
+	toString();
+	wait();
+
+Stirng.substring(start,len)
+byte -128-127
+
+
+super
+	访问父类被隐藏的私有成员变量
+	调用父类中被重写的方法
+	调用父类的构造函数
+
+三元运算符会对两个结果的数据类型，进行自动的类型提升。
+	Object o1 = true ? new Integer(1) : new Double(2.0);
+	实际为：Object o1 = true ? new Double(1.0) : new Double(2.0);
+
+运算符优先级
+	单目乘除为关系，逻辑三目后赋值。 
+
+	单目： ++ --  
+	乘除：* / % + - 
+	位：<< >> 
+	关系：> < >= <= == != 
+	逻辑：&& || & | ^ 
+	三目：A > B ? X : Y 
+	赋值：= += -= *= /=
+
+设计理念
+	is-a:继承关系 
+	has-a:从属关系 
+	like-a:组合关系
+	
+java程序内存泄露的最直接表现
+	程序抛内存控制的Exception
+
+泛型
+	编译时会还原成没有泛型的代码，编译速度稍慢，运行速度一样
+
+语法糖
+	用更简练的言语表达较复杂的含义
+
+事务的隔离级别有4个，由数据库系统实现，由低到高依次为
+	Read uncommitted、Read committed、Repeatable read、Serializable，
+	这四个级别可以逐个解决脏读、不可重复读、幻读这几类问题。
+
+Collection是java.util下的接口，它是各种集合结构的父接口
+Collections是java.util下的类，它包含有各种有关集合操作的静态方法
+
+
+
+
+
+结果集（ResultSet）是数据查询结果返回的一种对象
+	读取数据方法是 ： getXXX(),他的参数可以使整型表示第几列（是从1开始的），还可以是列名
+基础知识
+	URL u =new URL("http://www.123.com");不管网址是否存在，最后都会返回该网址的一个连接，打印出来就是该网址。
+	引用类型一般都具有继承性，但是值类型一般都是封装的，因此值类型不能作为其他任何类型的基类。
+	jre判断是否执行结束的标准是所有前台线程执行完毕
+	web应用程序中， web容器(如tomcat)负责将Http请求转换为HttpServletRequset对象
+
+	-d destination 目的地
+	-s source 起源地
+	javac -d 指定放置生成的类文件的位置
+	javac -s 指定放置生成的源文件的位置
+
+
+数值溢出后为负数开始  //待考证
+File类能够读写文件
+数据域可以是基本类型变量，也可以是一个对象
+java中流处理可以分为字节流和字符流
+	字节流（传输的基本单位是字节的流，二进制）
+		InputStream/OutputStream
+		FileInputStream/FileOutputStream
+		BufferedInputStream/BufferedOutputStream
+			是FileInputStream的子类
+		
+	字符流（传输的基本单位是字符的流，编码的字符）
+		Reader/Writer
+		InputStreamReader/OutputStreamWriter
+		FileReader/FileWriter
+		BufferedReader/BufferedWriter
+			是Reader的子类
+	字符流和字节流的区别
+		前者是字符读入，后者是字节读入。
+队列（Queue先进先出）
+	内置的不阻塞队列
+		PriorityQueue
+		ConcurrentLinkedQueue
+	实现阻塞接口的
+		* ArrayBlockingQueue ：一个由数组支持的有界队列。
+	　　* LinkedBlockingQueue ：一个由链接节点支持的可选有界队列。
+	　　* PriorityBlockingQueue ：一个由优先级堆支持的无界优先级队列。
+	　　* DelayQueue ：一个由优先级堆支持的、基于时间的调度队列。
+	　　* SynchronousQueue ：一个利用 BlockingQueue 接口的简单聚集（rendezvous）机制。
+	
+	
+	
+	
+	基础
+	java如何支持正则表达式
+		str.matches(String regex)  //匹配正则表达式 retuen boolean
+		str.replaceAll(String regex, String replacement)//成功则返回替换的字符串，失败则返回原始字符串。
+		str.replaceFirst(String regex, String replacement)//成功则返回替换的字符串，失败则返回原始字符串。
+		str.split(String regex, int limit) //根据正则表达式分隔符  return 字符串数组。
+
+		正则表达式：在处理字符串时，需要查找符合复杂规则的字符串，用正则表达式来描述。
+		str = "杭州市(萧山区)(滨江区)(上城区)(西湖区)";
+		Pattern p = Pattern.compile(".*?(?=\\()");//赋予正则表达式
+		Matcher mat = p.matcher(str);//生成matcher对象
+		if(mat.find()) { //尝试在目标字符串里查找下一个匹配子串
+			System.out.println(mat.group());//返回由以前匹配操作所匹配的输入子序列。
+		}
+	输出某种编码的字符串
+		public static String translate(String str) {
+		String tempStr="";
+		tempStr = new String(str.getBytes("ISO-8859-1"), "GBK");
+		tempStr = tempStr.trim();//删除头尾空白字符串
+		return tempStr;
+	}
+	大O符号并给出不同数据结构的例子
+		表示时间复杂度
+	4.0-3.6=0.40000001现象
+		10进制转为2进制再计算，2进制的小数无法精确表达10进制小数，会有误差
+				
+
+	AOP(Aspect Oriented Programming)面向切面编程
+		作为面向对象(OOP)的补充,处理各模块的横切关注点，比如事务管理，日志，缓存等，降低耦合度，提高开发效率
+		连接点：程序执行的某个位置（如:方法调用前/后，抛出异常后）
+		切点：一个切点可以匹配多个连接点，定义了增强将要发生的地方
+		增强：织入到目标类连接点上的一段代码，Spring提供的增强接口带方位名，如：beforeAdvice,AfterReturningAdvice,ThrowsAdvice等
+		引介：是特殊的增强，为类添加了一些属性和方法。这样，即使业务类原本没有实现某个接口，
+				通过引介功能，可以动态的为该业务类添加接口的实现逻辑，让业务类成为这个接口的实现类
+		织入：是将增强添加到目标类具体连接点上的过程，AOP三种织入方式：编译期织入，装载期织入，运行时织入
+		切面：切点和增强组成，包括了对横切关注功能的定义，对连接点的定义
+		
+	BeanFactory和ApplicationContext的区别
+		BeanFactory:spring中最低层的接口，提供简单的容器功能，实例化对象和拿对象
+		ApplicationContext:继承BeanFactory接口，更高级的容器，功能更多
+	@RestController -返回json数据
+		@RequestBody通常用来返回JSON数据或者是XML数据
+		@Controller 在web层，表示是控制器
+
+Hibernate
+	持久层设计要考虑的问题
+		数据存储逻辑的分离，提供抽象化的数据访问接口
+		数据访问底层实现的分离，可以在不修改代码的情况下切花底层实现
+		资源管理和调度的分离，在数据访问层实现同一的资源调度（如缓存机制）
+		数据抽象，提供更好面向对象的数据操作
+		
+	实体对象的三种状态
+		瞬时态：new出来的对象，当没有变量引用，就会被回收
+		持久态：对象实例在数据库中有对应的记录，被修改后不会马上同步数据库，直到事务提交
+		游离态：Session进行close(),clear(),后变为游离态
+	常见优化策略
+		指定合理缓存策略（二级缓存，查询缓存）
+		采用合理的Session管理机制
+		尽量使用延迟加载特性
+		设定合理的批处理参数
+		可以选用UUID作为主键生成器
+		可以使用基于版本好的乐观所替代悲观锁
+		可以开启hibernat.show_sql选项查看生成的Sql，了解底层的状况，开发完后关闭此选项
+		合理的索引，恰当的数据分区策略都会带来性能的提升
+	悲观锁和乐观锁
+		悲观锁：处理数据设置为锁状态
+		乐观锁：通过增加版本号字段，如果前后版本号不一致，将重新提交，跟新数据时版本号+1.
+			增加了一个字段，浪费了空间，但并发性更好，节省时间
+	延迟加载机制
+		并不是在读取的时候把数据加载进来，而是等到使用的时候再加载
+		hibernate 使用了虚拟代理机制来实现延迟加载
+		Session的load()方法加载数据或者一对多关联映射再使用延迟加载的情况下从一加载多的一方，得到的都是虚拟代理
+		返回给用户的是对象的代理，不是实体，当用户调用getter()方法时才会去数据库加载数据，同时需要数据库链接。而会话关闭的话，链接就关闭了
+		解决延迟加载和session关闭的方式
+			关闭延迟加载机制
+			再session关闭前线获取需要查询的数据
+			使用拦截器/过滤器延长Session的生命周期直到视图获得数据。
+	Session的load和get方法的区别
+		如果无记录，get返回null,load会抛出异常
+		get方法直接返回实体类对象，load方法返回实体类对象的代理
+	SessionFactory是线程安全的，可以被多个线程并发访问。一般只会再启动的时候构建
+	Session是一个轻量级非线程安全的对象（线程之间不能共享Session）,是于数据库交互的单元。
+		由SeesionFactory创建，任务完成之后关闭，是持久层服务对外提供的接口，会延迟获取数据库链接。
+	一级缓存和二级缓存
+		一级缓存，保存/修改持久化实体，Session不会立即将改变提交给数据库，而是缓存到Session中，除非,close()方法关闭Session,可以减少程序于数据库的交互，提高性能
+		二级缓存，全局性，所有Session都可以共享二级缓存，默认关闭，
+
+
+
+	

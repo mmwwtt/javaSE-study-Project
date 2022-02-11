@@ -1,0 +1,110 @@
+
+java	
+	java中使用Unicode 编码
+	JDK中java,javac,jar都是用java编写的
+java包
+	java.awt：提供了绘图和图像类，主要用于编写GUI程序，包括按钮、标签等常用组件以及相应的事件类。
+	java.lang：java的语言包，是核心包，默认导入到用户程序，包中有object类，数据类型包装类，数学类，字符串类，系统和运行时类，操作类，线程类，错误和异常处理类，过程类。
+	java.io：包含提供多种输出输入功能的类。
+	java.net： 包含执行与网络有关的类，如URL，SCOKET，SEVERSOCKET等。
+	java.applet：包含java小应用程序的类。
+	java.util：包含集合框架、遗留的 collection 类、事件模型、日期和时间设施、国际化和各种实用工具类（字符串标记生成器、随机数生成器和位数组、日期Date类、堆栈Stack类、向量Vector类等）。集合类、时间处理模式、日期时间工具等各类常用工具包。
+	java.sql：提供使用 JavaTM 编程语言访问并处理存储在数据源（通常是一个关系数据库）中的数据的 API。
+	java concurrent包
+		Semaphore：类，控制某个资源可被同时访问的个数;
+		ReentrantLock：类，具有与使用synchronized方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大；
+		Future：接口，表示异步计算的结果；
+		CountDownLatch： 类，可以用来在一个线程中等待多个线程完成任务的类。
+	System是java.lang包的一个类,lang包由java解释器自动引入，无需import,out是System的成员变量	
+	
+JVM,JRE,JDK的区别
+	JVM:Java虚拟机，
+	JRE:Java运行环境
+	JDK:Java开发工具包
+	JDK > JRE > JVM
+	
+
+
+		
+
+
+
+反射有什么用
+	可以在运行时加载使用编译期间完全未知的Class(但要知道类的名字)，同时获得类的方法和属性
+	很多框架需要根据配置文件加载不同的对象和类，调用不同的方法，需要反射来动态的加载对象
+		String str = "hello";
+		Class c1 = str.getClass(); //获得类,方式1
+		Class c2 = str.class; //方式2
+		Class c3 = Class.forName("java.lang.String"); //方式3 
+		Method m = c1.getMethod("toUpperCase");  //获得方法
+		System.out.println(m.invoke(str)); //HELLO  调用方法
+	在调用getName()方法而getName()是：包名+类名
+
+GC:可达性分析，无引用就回收
+
+
+set如何判断重复
+
+
+
+	
+
+
+jVM
+	识别.class文件并运行
+	数据区
+		方法区(线程共享)：类信息，常量，静态变量，即时编译器编译后的代码
+		堆(线程共享)：new出来的对象实例和数组
+		本地方法栈：native方法(调用非java代码的接口)
+		java虚拟机栈：常说的栈内存，局部变量表，操作数栈，动态链接，方法出口
+		程序计数器：虚拟机字节码指令，分支，循环，跳转，异常处理，线程恢复要用到
+		
+		常量池：未经new出来的变量
+		堆区：  成员变量的引用，new出来的变量
+		栈区：  局部变量的引用
+
+垃圾回收机制（GC）
+	管理堆中的对象
+	创建对象时，GC就监控对象的地址，大小，使用情况。
+	回收无用的对象，判断方法：引用计数，可达性分析
+	可通过System.gc()手动执行。
+	GC常用算法，调整堆空间:标记清除(会有内存碎片)，标记压缩(对象多时，效率低)，复制算法(只能用一半内存)。
+	
+java8新特性
+	Lambda 表达式：允许把函数作为一个方法的参数
+	方法引用：可以直接引用已有的Java类/对象的  方法/构造器
+	默认方法：就是接口中有了一个实现的方法
+	新工具：新的编译工具，如jjs,jdeps
+	Stream API：添加新的Stream API，真正的函数式编程风格引入到java中
+	Date Time API: 加强对日期和时间的处理
+	Optional类：主要解决空指针异常
+	Nashorn javaScript引擎：运行JVM运行特定的javascript应用
+
+常量池在堆里
+基本数据类型只是值，没有内存地址，在栈中
+off-heap(堆外内存)是进程管理内存，不受垃圾收集
+
+垃圾回收机制
+	scanvenge gc
+	full GC
+		老年代满
+		持久代满
+		System.ge()
+GC收集的标准
+	给对象赋予了空值null,以下再没有调用过
+	对象重新分配了内存空间
+	给对象赋予了新值
+		
+JSP内置对象和属性列举如下：
+1.request对象
+     客户端的请求信息被封装在request对象中，通过它才能了解到客户的需求，然后做出响应。它是HttpServletRequest类的实例。
+2.response对象
+     response对象包含了响应客户请求的有关信息，但在JSP中很少直接用到它。它是HttpServletResponse类的实例。
+3.session对象
+     session对象指的是客户端与服务器的一次会话，从客户连到服务器的一个WebApplication开始，直到客户端与服务器断开连接为止。它是HttpSession类的实例.
+4.out对象
+     out对象是JspWriter类的实例,是向客户端输出内容常用的对象
+5.page对象
+     page对象就是指向当前JSP页面本身，有点象类中的this指针，它是java.lang.Object类的实例
+6.application对象（只有一个）
+     application对象实现了用户间数据的共享，可存放全局变量。它开始于服务器的启动，直到服务器的关闭，在此期间，此对象将一直存在；

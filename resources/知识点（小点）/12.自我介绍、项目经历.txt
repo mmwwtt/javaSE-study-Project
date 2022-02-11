@@ -1,0 +1,37 @@
+自我介绍
+	我现在就读与浙江中医药大学滨江学院，本科在读，专业是计算机科学与技术。
+	主要的专业课程有，计算机网络，数据库系统原理，web前端，java开发
+	教学上学了structs框架和hibernate框架，自学了spring，springmvc,mybatis和springboot框架
+
+电脑配置
+	神州战神
+	128GB SSD + 1TB HDD
+	GTX1050Ti
+	i7
+服务器
+	使用windows server
+	数据库就安装在windows server上，是mysql
+购物平台(springboot)
+	用户登入后会将登入信息放到Session当中去
+	controller 调用 service , service调用dao
+	使用thymelea视图解析器，获得Model，request,session,ServletContext中的数据
+	<div th:text="${name}">我是div1</div>。获得内容
+	@Controller   控制器
+	public Class indexController(){
+		@Autowired  
+		private Service service //自动注入类
+		@RequestMapping("")
+		public String index(参数 对象，bean，session， request，){
+			处理完数据放到  request/session域中
+			return "index";
+		}
+	}
+redis传输的是序列化后的二进制字节流
+json传输的是二进制字节流
+redis速度大于json
+HTTP超文本传输是以文本的形式传输
+
+要问面试官什么
+		将来是否可以转正
+		工作时间
+		工资如何变化

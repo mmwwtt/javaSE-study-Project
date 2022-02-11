@@ -1,0 +1,72 @@
+数学
+	-n = ~n+1
+	补码计算
+
+
+类型
+	基本数据类型
+			java中byte,short,char都可以强制转化为int,float/double(int)会向下取整
+			'0' 强转为int是48
+		两个都是非 new出来的Integer,在-128-127之间为true,否则为false（会在常量池中取）
+		java的char类型，通常以UTF-16 BIG Endian的方式保存字符	
+
+
+类方法
+	list
+		list.add(6)  //末尾加一个6
+		list.add(0,4)  //下标0的位置加一个4
+		list.remove(1)  //移除下标为1的元素
+		
+		str.split(",")  根据,划分数组，如果没有则把整个放在一起
+		
+	Collextion接口中的方法
+		size()
+		containsALL(Collextion c)
+		compareTo(Object obj)
+		boolean remove(Object obj)
+	TreeSet 的subSet(from,true,to,true)	
+		set范围在from-to之间，true/false表示是否包含边界值
+	
+	String
+		String.toString 返回字符串
+		String.valueOf(char c) 返回字符串
+		String.replaceAll(String regex,String str) 替换所有符合正则表达式的字符串
+	Integer
+		Integer.parseInt("");是将字符串类型转换为int的基础数据类型
+		Integer.valueOf("")是将字符串类型数据转换为Integer对象
+		Integer.intValue();是将Integer对象中的数据取出，返回一个基础数据类型int
+
+运算符
+	java中
+		<<逻辑左移=算数左移(低位补0)
+		>>(算数右移,带符号右移)
+			低位溢出，高位用符号位的值补
+		>>>(逻辑右移，无符号右移)
+			低位移除，高位补0
+
+	+= 会进行自动强转(自动装箱功能)
+	为什么重写了HashCode()还要重写equals()
+		HashMap中，重写HashCode后两个对象获得相同的Hash值找到对应的链表，在通过equals比叫对象是否相同，equals重写后比较的是内容
+
+
+
+	
+	
+异常
+	Exception(父类)
+		RuntimeException 运行时异常（当运行时异常出现时，JVM会自行处理）
+			NullPointerException  空指针异常
+			ArrayIndexOutOfBoundsException  数组下标越界异常
+			ArithmeticException    算数类异常
+			ClassCastException   类型转换异常
+		CheckedException 检查时异常（检查时异常需要程序员手动去捕获或者抛出异常进行显示的处理）
+			IOException   文件异常
+			SQLException   sql异常
+	
+	异常处理
+		throws+异常类型   用在方法声明后面 跟异常类名
+		throw  用在方法体内 跟异常对象名，用来主动抛出异常
+		try{
+		}catch{
+		}finally{
+		}

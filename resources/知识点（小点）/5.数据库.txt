@@ -1,0 +1,96 @@
+事务的特征
+	原子性：事务是最小的执行单位，不允许分割，要么全完成，要么全没完成
+	一致性：执行事务前后，数据保持一致，即多个事务对同一个数据的读取都是相同的
+	隔离性：并发访问数据库时，事务之间不会相互干扰，是相互独立的
+	持久性：事务提交后，数据库中的数据的改变是持久的，即数据库发生故障也不会有影响
+
+什么是脏读，幻读，不可重复读
+	脏读：事务A更新了数据，事务B读到了新数据，但事务A进行了rollback操作，使事务B读到的数据不正确
+	不可重复读:在一个事务里面读取了两次某个数据，读出来的数据不一致
+	幻读：在一个事务里面的操作中发现了未被操作的数据
+事务隔离级别
+	DEFAULT 默认级别
+	READ_UNCOMMITTED 读未提交
+	READ_COMMITED 读已提交  解决脏读
+	REPEATABLE_READ 重复读取 解决不可重复读
+	SERLALIZABLE 序列化 解决幻读
+query接口的list方法和iterate方法的区别
+	list():
+		直接查询数据库
+	iterator():
+		到数据库中获取id，真正遍历某个对象时，先在缓存中找，找不到再去发sql到数据库，会有n+1查询问题
+
+
+
+	Create database q;
+	CREATE TABLE w(
+		id INT,
+		NAME CHAR(64),
+		address CHAR(64),
+		sale INT
+	);
+	INSERT INTO w(id,NAME,address,sale) VALUES
+		(2018,'qwe','NingBo',2501),
+		(2019,'wer','HangZhou',1999),
+		(2020,'asd','杭州',2456),
+		(2021,'zxc','杭州',7899),
+		(2022,'ghg','杭州',211);
+	DELETE FROM w WHERE id=2018; 
+	UPDATE w SET address='杭州' WHERE id=2019;
+	SELECT DISTINCT address FROM w;
+	SELECT * FROM w WHERE address='杭州' AND 1500<sale AND sale<3000; 
+
+select/update/delete/insert into
+check 限制输入范围
+beween and  包括=
+like
+in
+and/or
+order by
+limit
+as 别名
+alert:修改索引等
+group by: 对数据按照哪个字段进行分组  (去除重复的,留下分组的第一行)，一定要有聚合函数
+	distinct是把不同的记录显示出来
+	group by是在查询时先把纪律按照类分出来再查询
+having: 因为where无法和聚合函数一起使用，让我们筛选分组后的各组数据
+	类似与where，where过滤行，having过滤组
+聚合函数
+	avg(),sum()
+	max(),min()
+	count(*)返回记录总数
+	
+创建/删除数据库，表，
+增删改查
+索引查询
+	create index 索引名 on 表名(字段名);
+	drop index 索引名 on 表名;
+	alter table 表名 add unique (字段);
+	alter table 表名 drop index字段;
+
+视图
+sql中时间的类型
+	date
+	datetime
+	time
+	year
+	timestamp时间戳
+	
+sql优化
+	尽量使用索引，而且查询要走索引
+	对sql语句优化
+		子查询变成left join
+		limit分布优化，先利用ID定位，再分页
+		or优化
+		where代替having,having检索完所有记录才进行过滤
+
+数据库三大范式
+	第一范式: 列不可再分，（确保每列原子性）
+	第二范式: 每列必须依赖于主键(直接/间接)，有主键，（1张表只描述一件事）
+	第三范式：每列必须直接依赖于主键，非主键字段不能相互依赖，无依赖传递（用外键做表的关联）
+	
+DBMS子系统
+	安全性管理子系统
+	完整性管理子系统
+	并发控制子系统
+	恢复管理子系统:实现十五持久性
