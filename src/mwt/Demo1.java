@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
  *  java调试器:   jdb.exe     java的调试器
  *
  *	命名规范
- * 		标识符：数字、字母、下划线组成，不能数字开头
+ * 		标识符：数字、字母、下划线和美元组成，不能数字开头
  * 		项目名：全小写,单词用_隔开        javase-study-project
  * 		包名：全小写,多级用.隔开          mwt
  * 		类名、接口：首字母大写，驼峰命名   Demo
