@@ -84,8 +84,8 @@ jvm中垃圾回收分为scanvenge gc和full GC，其中full GC触发的条件可
 	持久代满
 	System.gc()
 
-final类型变量一定要显式初始化，默认初始化无效
-
+//final类型变量一定要显式初始化，默认初始化无效
+ final 定义的变量，可以在不是必须要在定义的同时完成初始化，也可以在构造方法中完成初始化。
 
 Collection是java.util下的接口，它是各种集合结构的父接口
 Collections是java.util下的类，它包含有各种有关集合操作的静态方法
@@ -210,3 +210,11 @@ AbstractSet类实现Set接口
 HashSet继承 AbstractSet类
 Class类
 String中的 substring()方法
+
+子类通过super()调用父类无参构造,如果没有手动调用,java会默认隐式的调用super()
+子类继承父类所有成员和方法,只是不能调用|访问 private修饰的方法|变量
+
+object类的方法
+    wait()
+    notify()
+    notifyAll()
