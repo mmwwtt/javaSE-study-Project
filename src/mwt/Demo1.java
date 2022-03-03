@@ -122,21 +122,21 @@ class BaseDemo{
  */
 class MathDemo{
     public static void main(String[] args){
-        byte byteNumber1 = 1, byteNumber2 = 2;
-        float floatNumber1 = 1.0f;
-        double doubleNumber1 = 1.5d;
-        long longNumber1 = 1L;
+        byte byte1 = 1, byte2 = 2;
+        float float1 = 1.0f;
+        double double1 = 1.5d;
+        long long1 = 1L;
 
         // 会报错， 左边byte 右边int
-        // byteNumber1 = byteNumber1 + byteNumber2;
+        // byte1 = byte1 + byte2;
 
-        // +=会将自动强转类型
-        byteNumber1 += byteNumber2;
+        // +=会将自动强转类型 等同于 (byte)(byte1+byte2 )
+        byte1 += byte2;
 
-        double doubleNumber = doubleNumber1 + byteNumber1;
-        float floatNumber = floatNumber1 + byteNumber1;
-        long longNumber = longNumber1 + byteNumber1;
-        int intNumber = byteNumber1 + byteNumber2;
+        double doubleNumber = double1 + byte1;
+        float floatNumber = float1 + byte1;
+        long longNumber = long1 + byte1;
+        int intNumber = byte1 + byte2;
 
         //向上取整(如果参数小于0且大于-1.0，结果为 -0)
         System.out.println(Math.ceil(1.3));
@@ -358,7 +358,7 @@ class DoWhileDemo {
 
 
 /**
- * 反射：可以在运行时加载使用编译期间完全未知的Class(但要知道类的名字)，同时获得类的方法和属性
+ * 反射：可以在运行时加载使用编译期间完全未知的Class(但要知道类的名字)，同时获得类的方法和属性并调用
  * 	很多框架需要根据配置文件加载不同的对象和类，调用不同的方法，需要反射来动态的加载对象
  *  会破坏面向对象的封装特性
  */
